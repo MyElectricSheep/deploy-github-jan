@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { Switch, Route, Link } from "react-router-dom";
+import "./App.css";
+
+const getPath = (path) => {
+ if (process.env.NODE_ENV === 'production') {
+   return process.env.PUBLIC_URL + path
+ } else {
+   return path
+ }
+}
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Link to="/something">Page 1</Link>{" "}
+    <Link to="/another">Page 2</Link>{" "}
+    <Link to="/again">Page 3</Link>
+      <Switch>
+        <Route path={getPath("/something")}>
+          <h1>Dolor</h1>
+        </Route>
+        <Route path={getPath("/another")}>
+          <h1>Ipsum</h1>
+        </Route>
+        <Route path={getPath("/again")}>
+          <h1>Lorem</h1>
+        </Route>
+        <Route exact path={getPath("/")}>
+          <h1>Site entry</h1>
+        </Route>
+      </Switch>
     </div>
   );
 }
